@@ -19,6 +19,7 @@ import Broncoaspiracao from "@/pages/modules/processo-cuidado/Broncoaspiracao";
 import Biovigilancia from "@/pages/modules/outros/Biovigilancia";
 import Cosmetovigilancia from "@/pages/modules/outros/Cosmetovigilancia";
 import Saneantes from "@/pages/modules/outros/Saneantes";
+import FormModalidade from "@/pages/FormModalidade";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,8 @@ const App = () => (
       <SidebarProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+  {/* basename ensures routes work under GitHub Pages subpath */}
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/notificador" element={<Notificador />} />
@@ -46,6 +48,8 @@ const App = () => (
             <Route path="/outros/biovigilancia" element={<Biovigilancia />} />
             <Route path="/outros/cosmetovigilancia" element={<Cosmetovigilancia />} />
             <Route path="/outros/saneantes" element={<Saneantes />} />
+            {/* Formulários por modalidade */}
+            <Route path="/form/:modalidade" element={<FormModalidade />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Farmacovigilancia from "@/pages/modules/Farmacovigilancia";
@@ -19,6 +21,8 @@ import Broncoaspiracao from "@/pages/modules/processo-cuidado/Broncoaspiracao";
 import Biovigilancia from "@/pages/modules/outros/Biovigilancia";
 import Cosmetovigilancia from "@/pages/modules/outros/Cosmetovigilancia";
 import Saneantes from "@/pages/modules/outros/Saneantes";
+import FormModalidade from "@/pages/FormModalidade";
+import AdminDashboard from "@/pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +32,9 @@ const App = () => (
       <SidebarProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <ToastContainer />
+  {/* basename ensures routes work under GitHub Pages subpath */}
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/notificador" element={<Notificador />} />
@@ -46,6 +52,10 @@ const App = () => (
             <Route path="/outros/biovigilancia" element={<Biovigilancia />} />
             <Route path="/outros/cosmetovigilancia" element={<Cosmetovigilancia />} />
             <Route path="/outros/saneantes" element={<Saneantes />} />
+            {/* Dashboard Administrativo */}
+            <Route path="/admin" element={<AdminDashboard />} />
+            {/* Formulários por modalidade */}
+            <Route path="/form/:modalidade" element={<FormModalidade />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

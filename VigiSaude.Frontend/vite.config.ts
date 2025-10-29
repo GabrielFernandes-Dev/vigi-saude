@@ -5,9 +5,12 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Important for GitHub Pages when deploying under a repository subpath
+  // In dev we keep "/"; in production we set the repo name subpath
+  base: mode === "development" ? "/" : "/vigi-saude/",
   server: {
     host: "::",
-    port: 8080,
+    port: 4200,
   },
   plugins: [
     react(),
